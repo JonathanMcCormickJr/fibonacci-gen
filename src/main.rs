@@ -16,9 +16,7 @@ fn main() {
 
             if sequence.len() == 0 {
                 sequence.push(0);
-            } else if sequence[sequence.len() - 1] == 0 {
-                sequence.push(1);
-            } else if sequence[sequence.len() - 1] == 1 && sequence[sequence.len() - 2] == 0 {
+            } else if sequence[sequence.len() - 1] == 0 || sequence[sequence.len() - 1] == 1 && sequence[sequence.len() - 2] == 0 {
                 sequence.push(1);
             } else {
                 sequence.push(sequence[sequence.len() - 1] + sequence[sequence.len() - 2])
