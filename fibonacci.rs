@@ -4,25 +4,32 @@
 fn main() {
 
 
-    fn generate_next_num(mut my_vec: Vec<u32>, mut quantity_to_push: u32) -> Vec<u32> {
+    fn generate_nums(quantity: u32) -> Vec<u32> {
+        let mut additional_iterations_needed = quantity;
+        let mut sequence: Vec<u32> = Vec::new();
 
+        loop {
+            if additional_iterations_needed < 1 {
+                break
+            }
 
-        if my_vec[my_vec.len() - 1] == 0 {
-            my_vec.push(1);
-        } else if my_vec[my_vec.len() - 1] == 1 && my_vec[my_vec.len() - 2] == 0 {
-            my_vec.push(1);
-        } else {
-            my_vec.push(my_vec[my_vec.len() - 1] + my_vec[my_vec.len() - 2])
-        }
+            if sequence.len() == 0 {
+                sequence.push(0);
+            } else if sequence[sequence.len() - 1] == 0 {
+                sequence.push(1);
+            } else if sequence[sequence.len() - 1] == 1 && sequence[sequence.len() - 2] == 0 {
+                sequence.push(1);
+            } else {
+                sequence.push(sequence[sequence.len() - 1] + sequence[sequence.len() - 2])
+            }
 
-        quantity_to_push -= 1;
+            additional_iterations_needed -= 1;
+        };
 
-        return generate_next_num(my_vec, quantity_to_push);
-
+        sequence
     }
 
-
-    generate_next_num(vec![0], 5_u32);
+    println!("{:?}", generate_nums(10));
 
 
 
