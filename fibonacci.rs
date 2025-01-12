@@ -1,37 +1,29 @@
-// fibonacci.rs
 
-// Fibonacci Number Generator
-
-use std::io;
+#![forbid(unsafe_code)]
 
 fn main() {
-    // Get the quantity of numbers to generate
-    println!("Enter the number of terms you want to generate: ");
-    let quantity_to_produce: u32 = io::stdin()
-        .lines()
-        .next()
-        .expect("No input received")
-        .expect("Failed to read line")
-        .parse()
-        .expect("Failed to parse number");
-    // Generate the Fibonacci numbers
-    let sequence: Vec<u32> = Vec::new();
 
-    let generate_next_fibonacci_num(current_num: u32) -> u32 {
 
-        if sequence.len() == 0 {
-            sequence.push(0);
-        } else if sequence.len() == 1 | sequence.len() == 2 {
-            sequence.push(1);
+    fn generate_next_num(mut my_vec: Vec<u32>, mut quantity_to_push: u32) -> Vec<u32> {
+
+
+        if my_vec[my_vec.len() - 1] == 0 {
+            my_vec.push(1);
+        } else if my_vec[my_vec.len() - 1] == 1 && my_vec[my_vec.len() - 2] == 0 {
+            my_vec.push(1);
         } else {
-            sequence.push(sequence[-1] + sequence[-2]);
+            my_vec.push(my_vec[my_vec.len() - 1] + my_vec[my_vec.len() - 2])
         }
 
-        if sequence.len() < quantity_to_produce {
-            generate_next_fibonacci_num(sequence[-1]);
-        } 
+        quantity_to_push -= 1;
+
+        return generate_next_num(my_vec, quantity_to_push);
+
     }
 
-    generate_next_fibonacci_num(quantity_to_produce)
+
+    generate_next_num(vec![0], 5_u32);
+
+
 
 }
